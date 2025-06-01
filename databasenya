@@ -1,0 +1,43 @@
+CREATE DATABASE kantin_smk;
+USE kantin_smk;
+
+CREATE TABLE kantin (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nama_kantin VARCHAR(100) NOT NULL,
+    deskripsi TEXT
+);
+CREATE TABLE menu (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nama_menu VARCHAR(100) NOT NULL,
+    harga INT NOT NULL,
+    jenis ENUM('makanan', 'minuman') NOT NULL,
+    stok INT DEFAULT 0,
+    kantin_id INT,
+    FOREIGN KEY (kantin_id) REFERENCES kantin(id)
+);
+
+CREATE TABLE pesan (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nama VARCHAR(100) NOT NULL,
+    email VARCHAR(100) NOT NULL,
+    pesan TEXT NOT NULL,
+    tanggal TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+INSERT INTO kantin (nama_kantin, deskripsi) VALUES
+('warung bu indah', 'makanan rumahan yang bergizi dan sehat'),
+('warung mpok wati', 'minuman segar dan kekinian');
+
+INSERT INTO menu (nama_menu, harga, jenis, stok, kantin_id) VALUES
+('Nasi Pecel Lele', 12000, 'makanan', 25, 1),
+('Soto Ayam Kampung', 15000, 'makanan', 20, 1),
+('Gado-gado Jakarta', 10000, 'makanan', 18, 1),
+('Es Dawet Ayu', 6000, 'minuman', 30, 1),
+('Wedang Jahe', 5000, 'minuman', 25, 1),
+('Jus Jambu Merah', 8000, 'minuman', 20, 1),
+('Chicken Katsu Curry', 28000, 'makanan', 12, 2),
+('Beef Teriyaki Bowl', 32000, 'makanan', 10, 2),
+('Fish & Chips', 25000, 'makanan', 15, 2),
+('Matcha Latte', 18000, 'minuman', 22, 2),
+('Brown Sugar Boba', 15000, 'minuman', 25, 2),
+('Strawberry Smoothie', 16000, 'minuman', 18, 2);
